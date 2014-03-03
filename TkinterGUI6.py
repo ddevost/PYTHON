@@ -1,0 +1,57 @@
+import tkinter
+from tkinter import filedialog
+from tkinter import tix
+from tkinter import Image
+
+#  Global variables ouside of the function, so they can be called by all functions.
+
+pic = None
+filePath = None
+
+class MyGUI:
+
+           def __init__(self): 
+                # Create main window 
+                self.main_window = tkinter.Tk() 
+                # Create label 
+                self.label1 = tkinter.Label(self.main_window, text='Hello Welcome to Our GUI')
+                # Add the label to the window with the pack function
+                self.label1.pack() 
+                # Create button
+                self.b1 = tkinter.Button(self.main_window, text="Choose a Picture", command=self.create_button_with_scoped_image)
+                # add button
+                self.b1.pack()
+                # Enter tkinter main loop
+                tkinter.mainloop()
+
+           def openShow(self):   # We have to pass self to the openShow function
+                      print ("#1")   # Debug statement
+                      global filePath
+                      global pic
+                      filePath = tkinter.filedialog.askopenfilename()
+
+                      print (filePath)   # Debug Statement
+                      photo = tkinter.PhotoImage(file=filePath)
+
+           def create_button_with_scoped_image(self):
+                   filePath = tkinter.filedialog.askopenfilename()
+                   img = tkinter.PhotoImage(file=filePath)
+                   button = tkinter.Button(self.main_window, image=img)
+                   button.img = img  # store a reference to the image as an attribute of the widget
+                   button.grid()
+    
+           #create_button_with_scoped_image()  # WORKS:  the button will have an image on it
+
+
+
+           
+# Run GUI
+mygui = MyGUI()
+
+
+#openShow()
+
+           #def changeText(self):
+                # create a message box
+           #  tkinter.messagebox.showinfo("Picture Changer", "Choose a Picture pressed")
+
